@@ -1,0 +1,24 @@
+services:
+  jcsl:
+    build:
+      context: .
+      args:
+        JCSL_ACCEPT_LICENSE: "yes"
+        # JCSL_URL: https://example.internal/jcsl.tar.gz
+    image: jcsl-docker
+    platform: linux/amd64
+    environment:
+      # Must also be accepted at runtime.
+      JCSL_ACCEPT_LICENSE: "yes"
+      JCSL_BIND_IP: "0.0.0.0"
+      JCSL_PORT: "9025"
+      # Test keyset: replace these values in real use.
+      JCSL_KVN: "01"
+      JCSL_ENC_KEY: "404142434445464748494A4B4C4D4E4F"
+      JCSL_MAC_KEY: "404142434445464748494A4B4C4D4E4F"
+      JCSL_DEK_KEY: "404142434445464748494A4B4C4D4E4F"
+      JCSL_GLOBAL_PIN: "000000000000"
+      JCSL_PIN_TRIES: "03"
+    ports:
+      - "9025:9025"
+    restart: unless-stopped
